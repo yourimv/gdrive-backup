@@ -1,11 +1,14 @@
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from dotenv import load_dotenv
 import os
 import logging
 
+load_dotenv()
+
 # Environment Configuration constants
-BUP_DIR_ROOT_PATH = os.environ.get("PYDRIVE_BUP_DIR")
-GOOGLE_DRIVE_ROOT_ID = os.environ.get("PYRDRIVE_GOOGLE_DRIVE_DIR_ID")
+BACKUP_DIR_ROOT_PATH = os.environ.get("BACKUP_DIRECTORY_ROOT")
+GOOGLE_DRIVE_ROOT_DIR_ID = os.environ.get("GOOGLE_DRIVE_ROOT_DIR_ID")
 
 # Logging configuration
 logging.basicConfig(filename='application.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -88,5 +91,5 @@ def search_folder_recursively(folder_id, root):
             except:
                 logging.error('File %s failed to download', file_path)
 
-search_folder_recursively(GOOGLE_DRIVE_ROOT_ID, BUP_DIR_ROOT_PATH)
+search_folder_recursively(GOOGLE_DRIVE_ROOT_DIR_ID, BACKUP_DIR_ROOT_PATH)
 logging.info('Download finished. Please check application log')
